@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Obelisk Package Repository</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="hero">
+        <h1>Obelisk Package Repository</h1>
+        <p>
+          Welcome. This is the official-style static package feed for
+          <code>opkg</code> on Obelisk.
+        </p>
+        <p class="hint">
+          Add to <code>/etc/opkg/repos.conf</code>:
+          <code>desktop https://&lt;user&gt;.github.io/&lt;repo&gt;/repo</code>
+        </p>
+      </header>
+
+      <section class="card links">
+        <h2>Repository Files</h2>
+        <a href="./index.json">index.json</a>
+        <a href="./packages/">packages/</a>
+        <a href="./recipes/">recipes/</a>
+      </section>
+
+      <section class="card">
+        <h2>Packages</h2>
+        <div id="status">Loading package index...</div>
+        <table id="pkg-table" hidden>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Version</th>
+              <th>Arch</th>
+              <th>Summary</th>
+              <th>File</th>
+            </tr>
+          </thead>
+          <tbody id="pkg-body"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <script>
+      async function loadPackages() {
+        const status = document.getElementById("status");
+        const table = document.getElementById("pkg-table");
+        const body = document.getElementById("pkg-body");
+        try {
+          const res = await fetch("./index.json", { cache: "no-store" });
+          if (!res.ok) throw new Error("fetch failed");
+          const data = await res.json();
+          if (!Array.isArray(data) || data.length === 0) {
+            status.textContent = "No packages published yet.";
+            return;
+          }
+          data.forEach((pkg) => {
+            const tr = document.createElement("tr");
+            const name = pkg.name || "-";
+            const ver = pkg.ver || "-";
+            const arch = pkg.arch || "-";
+            const summary = pkg.summary || "-";
+            const filename = pkg.filename || "-";
+            tr.innerHTML =
+              "<td>" + name + "</td>" +
+              "<td>" + ver + "</td>" +
+              "<td>" + arch + "</td>" +
+              "<td>" + summary + "</td>" +
+              "<td><code>" + filename + "</code></td>";
+            body.appendChild(tr);
+          });
+          status.textContent = data.length + " package(s) found.";
+          table.hidden = false;
+        } catch (_e) {
+          status.textContent = "Unable to load index.json.";
+        }
+      }
+      loadPackages();
+    </script>
+  </body>
+</html>

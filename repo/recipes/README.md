@@ -15,6 +15,6 @@ build=gnu
 depends=libc,libpcre2
 ```
 
-Validate with in-image opkg:
+Validate in Obelisk with:
 
 `opkg recipe validate <file.opkrecipe>`
