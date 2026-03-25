@@ -1,6 +1,6 @@
 # Obelisk
 
-This repository is the public GitHub mirror of the Obelisk operating system.
+This repository is the public GitHub mirror of the Obelisk operating system. (Not yet released, WIP)
 
 Obelisk is a modern, UNIX-inspired system built from first principles with a focus on clarity, control, and performance. This mirror exists to make the project accessible, browsable, and easy to contribute to.
 
