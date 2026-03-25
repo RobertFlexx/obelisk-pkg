@@ -1,0 +1,11 @@
+# Obelisk recipe DSL v0
+name=gnu-sed
+version=4.9
+arch=x86_64
+section=base
+license=GPL-3.0-or-later
+summary=GNU sed for Obelisk
+description=Stream editor built and packaged for Obelisk
+source=https://ftp.gnu.org/gnu/sed/sed-4.9.tar.xz
+build=gnu
+depends=libc
