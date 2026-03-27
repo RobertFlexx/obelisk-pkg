@@ -7,7 +7,7 @@ Obelisk is a modern, UNIX-inspired system built from first principles with a foc
 **Obelisk-pkg is NOT OpenWrt's opkg! (both are opkg, confusing ik)**
 ## Overview
 
-The repository contains the core source tree for Obelisk, including:
+The [repository](https://robertflexx.github.io/obelisk-pkg/) contains the core source tree for Obelisk, including:
 
 * Kernel and low-level system components
 * Userspace utilities and base tooling
